@@ -1,34 +1,161 @@
 # SDPA_EMATM0048_2720314
-This repository contains my solution for part 1 and part 2 of SDPA coursework.  
-In part 1, the program implements a **text-based flower shop simulation** using an object-oriented design in Python.
+This repository contains my solution for **part 1** and **part 2** of the SDPA coursework.  
+Part 1 implements a **text based flower shop simulation** using an **object oriented design** in Python.  
+Part 2 extends the work in a **Jupyter notebook** and focuses on **data analysis and visualisation**.
+
+---
+
 # Part 1: Flower Shop Simulation
-The program models a small flower shop which:  
- - employs florists to assemble bouquets  
- - manages a greenhouse with limited storage and monthly depreciation  
- - buys supplies from different suppliers  
- - sells bouquets to customers within monthly demand and capacity constraints  
- - tracks the shop’s cash flow and detects bankruptcy  
+The program models a small flower shop which  
+ - **employs florists** to **assemble bouquets**  
+ - manages a **greenhouse** with **limited storage** and **monthly depreciation**  
+ - buys **supplies** from different **suppliers**  
+ - **sells bouquets** to customers within **monthly demand** and **capacity limits**  
+ - tracks the shop **cash flow** and **detects bankruptcy**  
+
 ## 1. How to Run
+
 ### Requirements
-Python 3.14 or 3.14+  
-Standard library only: math
+**Python 3.10 or newer**  
+**Standard library only**  
+
 ### Running the simulation
-From the root of the repository:
-```bash  
+From the root of the repository  
+```bash
 python main.py
 ```
 
-You will be prompted to:    
- - Enter the number of months to run the simulation:  
-   - Press Enter with no input to use the default of 6 months.  
- - For each month:  
-   - Hire or fire florists(with any specialties).  
-   - Enter the quantity of each type of bouquet you wish to sell to develop a sales plan.  
- - The program then simulates the month and displays by following ordering:  
-   - current florists  
-   - sales and costs for the month  
-   - greenhouse stock levels  
-   - updated cash balance  
- - The simulation ends when:  
+You will be prompted to  
+ - **Enter the number of months** to run the simulation  
+   - Press Enter with no input to use the **default of 6 months**.  
+ - For each month  
+   - **Hire or fire florists** and optionally give them **specialties**.  
+   - Enter the quantity of each type of bouquet you wish to sell to form a **sales plan**.  
+ - The program then simulates the month and displays in the following order  
+   - current florists and their specialties  
+   - **sales and costs** for the month  
+   - **greenhouse stock levels**  
+   - **updated cash balance**  
+ - The simulation ends when  
    - the chosen number of months has been completed  
-   - the shop goes bankrupt (cash is insufficient to pay monthly expenses)  
+   - the shop goes bankrupt because cash is no longer sufficient to pay monthly expenses  
+
+
+## 2. Coursework Task 1 Summary
+Task 1 requires a text based simulation of a flower shop that  
+ - offers **three bouquet types** with **fixed recipes** and **preparation times**  
+ - stores **roses, daisies and greenery** in a greenhouse with  
+   - a **maximum capacity** per item  
+   - **monthly depreciation** of stock  
+   - a **fixed monthly running cost**  
+ - starts with a **full greenhouse** and an **initial cash balance of 7,500 pounds**  
+ - employs **between one and four florists**, each providing a **fixed number of working hours** and a **fixed wage**  
+
+Each month the owner must  
+ - **decide how many florists** to employ, within the minimum and maximum limits  
+ - **decide how many bouquets** of each type to sell  
+
+The program must  
+ - **respect customer demand** for each bouquet type  
+ - ensure the **sales plan** fits within **florist capacity** and **available stock**  
+ - **update inventory** using stock usage, depreciation, and restocking to full capacity  
+ - **update cash** using sales revenue and all costs  
+ - stop when all months have been simulated or the shop becomes **bankrupt**  
+
+## 3. Program Design and Structure
+
+### 3.1 Modules
+The solution is divided into several modules.
+
+ - `Constants.py`  
+   Holds all configuration values used by the simulation such as bouquet recipes, preparation times, greenhouse capacity and depreciation, supplier prices, customer demand, bouquet prices, florist working hours and wages.
+
+ - `Florist.py`  
+   Defines the `Florist` class which stores the florist name, optional bouquet specific talents and methods to compute labour capacity and time required to make bouquets.
+
+ - `Inventory.py`  
+   Defines the `Inventory` class which tracks current greenhouse stock, applies monthly depreciation and calculates how many items are needed to restock to full capacity.  
+   Also defines the `Procurement` class which compares supplier prices, selects the cheapest supplier for each item and calculates restocking cost.
+
+ - `FlowerShop.py`  
+   Defines the `FlowerShop` class which holds the list of florists, owns the inventory and procurement objects, tracks the cash balance, checks whether a monthly sales plan is feasible and calculates monthly revenue and costs.
+
+ - `main.py`  
+   Contains the main program loop.  
+   It handles all user interaction, calls the methods of the classes above and does not define any classes itself.
+
+### 3.2 Responsibilities and relationships
+ - FlowerShop acts as the **central controller** and coordinates florists, inventory and procurement.  
+ - Florist represents individual workers and only handles **labour related logic**.  
+ - Inventory encapsulates all **stock** and **greenhouse behaviour**.  
+ - Procurement focuses on **suppliers and prices** and can be changed without touching other modules.  
+
+This separation of responsibilities keeps the design clear and easier to maintain.
+
+## 4. Simulation Workflow
+
+The simulation runs in monthly steps.
+
+### 4.1 Initial setup
+ - The greenhouse is filled to its **maximum capacity** using values from `Constants.py`.  
+ - The **initial cash balance** is set to 7,500 pounds.  
+ - Before the first month is simulated the user must **employ at least one florist**.
+
+### 4.2 Monthly loop
+For each month the following steps occur.
+
+1. **Staff and sales decisions**  
+   - Print the current number of florists and their specialties.  
+   - Allow the user to hire or fire florists, while enforcing the minimum and maximum limits.  
+   - When hiring, ask for the florist name and any talents for specific bouquet types.  
+   - Reject empty names and duplicate names and ask the user to enter a different name.  
+   - Ask the user how many bouquets of each type to sell this month.
+
+2. **Plan validation**  
+   - Check that the requested quantities do not exceed customer demand.  
+   - Use the **scheduling algorithm** to check that the plan fits within total florist working hours.  
+   - Check that the required roses, daisies and greenery do not exceed current inventory.  
+   - If any check fails, explain the reason and ask the user to enter a new plan.
+
+3. **Production and sales**  
+   - Deduct the required quantities from inventory.  
+   - Calculate total revenue from the bouquets sold.
+
+4. **Depreciation and restocking**  
+   - Apply **monthly depreciation** to each item in stock, rounding losses up to the next whole unit.  
+   - Compute how many units of each item are needed to refill the greenhouse to maximum capacity.  
+   - Let the user choose suppliers manually or let the program choose the **cheapest suppliers** automatically.  
+   - Calculate the total **restocking cost**.
+
+5. **Costs, cash and termination**  
+   - Calculate florist wages, greenhouse running cost and restocking cost.  
+   - Update cash as previous cash plus revenue minus total costs.  
+   - If cash is no longer sufficient, **declare bankruptcy**, print a message and stop the simulation.  
+   - Otherwise print the updated status of cash, florists and stock and proceed to the next month.
+
+## 5. Extensions and Design Highlights
+
+ - **Flexible florist talents**  
+   Each florist can have multiple talents represented as a time ratio for specific bouquet types.  
+   The time required method applies these ratios to the base preparation times, so new bouquet types or different speed factors can be added by editing constants only.
+
+ - **Scheduling algorithm**  
+   When checking florist capacity the program breaks the plan into individual bouquet tasks, sorts them by preparation time and assigns each task to the florist who can complete it fastest and still has remaining hours.  
+   This gives a realistic distribution of work and ensures that the whole plan is feasible.
+
+ - **Supplier optimisation**  
+   The procurement module compares supplier prices for each item, can automatically choose the cheapest supplier or allow the user to pick manually, and calculates the total restocking cost.  
+
+ - **Config driven design**  
+   All business parameters are stored in `Constants.py`, which makes it easy to understand the scenario and run different experiments by editing one file.
+
+## 6. Assumptions and Limitations
+
+ - Suppliers always have enough stock and deliver immediately.  
+ - All bouquets in a feasible plan are sold during the month.  
+ - Preparation time depends only on bouquet type and florist talents.  
+ - No random changes in prices or demand are modelled.  
+
+These assumptions keep the focus on the main optimisation and capacity planning tasks required for part 1.
+
+---
