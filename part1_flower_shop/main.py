@@ -1,6 +1,6 @@
+
 from Constants import *
 from Inventory import Inventory, Procurement
-from Florist import Florist
 from FlowerShop import FlowerShop
 
 """--------utility input check functions--------"""
@@ -107,7 +107,19 @@ for month in range(months):
     print(f"Current number of florists: {len(flowershop.florist_status())}\n"
           f"current staff: {[florist.name for florist in flowershop.florists]}")
 
-    florist_hire_qty = other_int_input("How many florists would you like to hire?\n")
+    max_hire = florist_max_capacity - len(flowershop.florists)
+    if max_hire == 0:
+        print("Staff is already at maximum.")
+        florist_hire_qty = 0
+    else:
+        while True:
+            florist_hire_qty = other_int_input(
+                f"How many florists would you like to hire? (0~{max_hire})\n"
+            )
+            if 0 <= florist_hire_qty <= max_hire:
+                break
+            print(f"Please enter a number between 0 and {max_hire}.")
+
     for _ in range(florist_hire_qty):
         florist_name = input("please input florist name (one at a time):\n").strip()
         if florist_name == "":
@@ -133,6 +145,25 @@ for month in range(months):
             talents = None
         flowershop.add_florist(florist_name, talents)
     print(f"current staff: {[florist.name for florist in flowershop.florists]}")
+
+    # optionally remove florists with bounds checking
+    removable = len(flowershop.florists) - florist_min_capacity
+    if removable > 0:
+        while True:
+            remove_qty = other_int_input(
+                f"How many florists would you like to remove? (0~{removable})\n"
+            )
+            if 0 <= remove_qty <= removable:
+                break
+            print(f"Please enter a number between 0 and {removable}.")
+        for _ in range(remove_qty):
+            name_to_remove = input("please input florist name to remove:\n").strip()
+            if name_to_remove == "":
+                print("name cannot be empty. Skipping.")
+                continue
+            print(flowershop.remove_florist(name_to_remove))
+    else:
+        print("Staff is already at minimum; cannot remove more florists.")
 
     print("How much of each bouquet would you like to sell?")
     while True:
@@ -177,7 +208,7 @@ for month in range(months):
     """print current flowershop status"""
     print(
         "Current shop status:\n"
-        f"current staff: {[florist.name for florist in flowershop.florists]}\n"
+        f"current staff: {[florist.name for florist in flowershop.florists]}\n\n"
         "Greenhouse quantity:\n"
         f"{current_stock}"
     )

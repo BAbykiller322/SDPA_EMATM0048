@@ -2,12 +2,20 @@ from Constants import greenhouse_max_capacity,depreciation_pm,greenhouse_cost_pm
 import math
 
 class Procurement:
-    """Handles supplier-related logic: choosing cheapest supplier and calculating restock cost."""
+    """Handle supplier-related logic: choose cheapest supplier and total restock cost."""
     def __init__(self, supplier_prices: dict = suppliers):
         self.supplier_prices = supplier_prices
 
     def choose_best_supplier(self,restock_needed: dict[str, int])-> dict[str, str]:
-        """Additional method: automatically select the cheapest supplier for each plant."""
+        """
+        Pick the cheapest supplier per plant.
+
+        Input:
+        restock_needed: {plant: qty_needed}
+
+        Output:
+        best_choice:{plant: supplier_name} minimizing unit price for each plant.
+        """
         best_choice = {}
         for plant in restock_needed.keys():
             best_supplier = min(
@@ -18,7 +26,16 @@ class Procurement:
         return best_choice
 
     def restock_cost(self,restock_needed: dict[str, int],supplier_choice: dict[str, str]) -> float:
-        """Calculate total restock cost based on supplier choice."""
+        """
+        Calculate total restock cost.
+
+        Inputs:
+        restock_needed: {plant: needed}
+        supplier_choice: {plant: supplier_name} to buy from.
+
+        Output:
+        restock_cost: cost for all restock plants
+        """
         restock_cost = 0.0
         for plant, qty in restock_needed.items():
             supplier = supplier_choice.get(plant)
@@ -29,11 +46,16 @@ class Procurement:
 
 
 class Inventory:
-    """Manages the greenhouse stock lifecycle with four steps: consumption，depreciation，restocking，cost."""
+    """Manage greenhouse stock lifecycle: consumption → depreciation → restocking → cost."""
     def __init__(
         self,
     ):
-        """Initialize inventory with capacity, cost, and procurement system."""
+        """
+        Initialize inventory state.
+
+        capacity, depreciation rates, greenhouse cost, recipes are loaded from constants.
+        current_stock starts at full capacity.
+        """
         self.capacity = greenhouse_max_capacity
         self.depreciation = depreciation_pm
         self.greenhouse_cost = greenhouse_cost_pm
@@ -45,7 +67,16 @@ class Inventory:
     def consume_plants(self,sale_plan) -> dict[str, int]:
         """
         Deduct plant quantities from current stock based on sales plan.
-        Tips：`self.current_stock`reflects monthly sales consumption.
+
+        Input:
+        sale_plan: {bouquet_name: qty_to_sell}
+
+        Calculation:
+        For each bouquet, multiply qty by recipe requirement to get plant consumption.
+        Reduce self.current_stock by consumption per plant (floors at 0).
+
+        Output:
+        {plant: consumed_qty_this_month}
         """
         consumption = {plant: 0 for plant in self.capacity}
         for bouquet, qty in sale_plan.items():
@@ -58,14 +89,30 @@ class Inventory:
         return consumption
 
     def apply_depreciation(self)-> tuple[dict[str, int], dict[str, int]]:
-        """Calculate the depreciation of various plants per month.return current_stock and loss"""
+        """
+        Apply monthly depreciation to stock.
+
+        Calculation:
+        Take a snapshot `stock_before_depreciation`.
+        loss[plant] = ceil(current_stock[plant] * depreciation_rate)
+        current_stock[plant] -= loss (floors at 0).
+
+        Output:
+        (updated_current_stock_dict, loss_dict)
+        """
+        self.stock_before_depreciation = self.current_stock.copy()
         for plant, rate in self.depreciation.items():
             self.loss[plant] = math.ceil(self.current_stock[plant] * rate) # must round up to ensure the loss is an integer
             self.current_stock[plant] = max(0, self.current_stock[plant] - self.loss[plant])
         return self.current_stock,self.loss
 
     def restock_needed(self) -> dict[str, int]:
-        """Calculate restock needed for each plant."""
+        """
+        Calculate units required to refill to capacity.
+
+        Output:
+        {plant: capacity - current_stock} for plants below capacity (others omitted).
+        """
         self.restock_needed_dict = {}
         for plant, capacity in self.capacity.items():
             if self.current_stock[plant] < capacity:
@@ -73,7 +120,12 @@ class Inventory:
         return self.restock_needed_dict
 
     def auto_restock(self) -> float:
-        """Additional coupling method: automatically select the best plan and restock to full capacity."""
+        """
+        Auto-pick cheapest suppliers and refill to full capacity.
+
+        Output:
+        restock_cost; also mutates current_stock to capacity.
+        """
         procurement = Procurement(suppliers) # best choice by default
         best_choice =  procurement.choose_best_supplier(self.restock_needed_dict)
         restock_cost = procurement.restock_cost(self.restock_needed_dict, best_choice)
@@ -82,17 +134,24 @@ class Inventory:
         return restock_cost
 
     def inventory_cost(self,restock_cost:float) -> float:
-        """Calculate total monthly inventory cost (maintenance + restocking)."""
-        maintenance_cost = sum(self.greenhouse_cost[plant] * (self.current_stock[plant] + self.loss[plant])for plant in self.current_stock.keys())
+        """
+        Calculate total monthly inventory cost.
+
+        Inputs:
+        restock_cost: already computed for this month.
+
+        Calculation:
+        maintenance_cost = sum(greenhouse_cost[plant] * base_stock[plant])
+        where base_stock is snapshot before depreciation.
+        total = restock_cost + maintenance_cost.
+
+        Output:
+        total inventory cost for the month.
+        """
+        base_stock = getattr(self, "stock_before_depreciation", self.current_stock)
+        maintenance_cost = sum(self.greenhouse_cost[plant] * base_stock[plant] for plant in self.current_stock.keys())
         return restock_cost + maintenance_cost
 
-    def get_stock_status(self) -> str:
-        """Additional method: return current stock."""
-        return (
-            f"Current Stock — Roses: {self.current_stock['roses']}, "
-            f"Daisies: {self.current_stock['daisies']}, "
-            f"Greenery: {self.current_stock['greenery']}"
-        )
 
 
 

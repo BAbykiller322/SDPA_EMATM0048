@@ -3,7 +3,7 @@ from Florist import Florist
 from Constants import *
 
 class FlowerShop:
-    """management class that coordinates sales, inventory, and costs."""
+    """Coordinate sales, inventory, staffing, and cash flow for the shop."""
     def __init__(self,inventory: Inventory):
         self.inventory = inventory
         self.florists = []
@@ -11,10 +11,20 @@ class FlowerShop:
         self.cash = initial_cash
 
     def set_supplier_choice(self,supplier_choice):
+        """Store a supplier choice mapping; not used elsewhere yet."""
         self.supplier_choice = supplier_choice
 
     def add_florist(self, name: str, talents: dict = None):
-        """employee management: add florist"""
+        """
+        Add a florist if under capacity.
+
+        Inputs:
+        name: string identifier.
+        talents: optional {bouquet: time_ratio} passed to Florist.
+
+        Output:
+        True if added; otherwise error string when duplicate or over max capacity.
+        """
         for florist in self.florists:
             if florist.name == name:
                 return f"ERROR: florist '{name}' exists."
@@ -26,7 +36,15 @@ class FlowerShop:
             return True
 
     def remove_florist(self, name: str):
-        """employee management: remove florist"""
+        """
+        Remove a florist if above minimum capacity.
+
+        Input:
+        name: florist name to remove.
+
+        Output:
+        updated staff list or error message.
+        """
         if len(self.florists) <= florist_min_capacity:
             return f"[Error] reached minimum capacity(1)."
         else:
@@ -34,10 +52,19 @@ class FlowerShop:
                 if florist.name == name:
                     self.florists.remove(florist)
                     return f"current staff: {[f.name for f in self.florists]}"
-            return f"[Error] no florist named '{name}'."
+            return f"no florist named '{name}'."
 
     def check_customer_demand(self,sale_plan: dict[str, int],bouquet_demands = bouquet_demand):
-        """Return list of bouquets exceeding demand."""
+        """
+        Validate sale plan against demand limits.
+
+        Inputs:
+        sale_plan: {bouquet: qty}
+        bouquet_demands: {bouquet: max_monthly_demand}
+
+        Output:
+        (ok: bool, exceeded_list: list of bouquets that exceed demand)
+        """
         exceeded = []
         for bouquet,qty in bouquet_demands.items():
             planned = sale_plan.get(bouquet, 0)
@@ -49,8 +76,18 @@ class FlowerShop:
 
     def check_florist_capacity(self,sale_plan: dict[str, int]):
         """
-        check if total florists can complete the required sale_plan in the month
-        returns: bool,assignment_dict
+        Check if current florists can craft the sale_plan within monthly hours.
+
+        Input:
+        sale_plan: {bouquet: qty}
+
+        Algorithm:
+        Expand tasks list with one entry per bouquet unit, sorted by descending base time.
+        For each task, pick the florist who can finish fastest; tie-breaker by remaining time.
+
+        Output:
+        bool,structured_assignment: dict
+        When ok=False, assignment shows partial attempted counts per florist.
         """
         florist_max_time = florist_working_hours * 60 # the max working time for each florist
         remaining_time = {f.name: florist_max_time for f in self.florists} # the remaining working time for each florist
@@ -93,7 +130,15 @@ class FlowerShop:
         return True, structured_assignment
 
     def check_inventory_capacity(self,sale_plan: dict[str, int]):
-        """check weather the sale_plan exceeded the inventory capacity"""
+        """
+        Check whether planned bouquets exceed greenhouse raw material capacity.
+
+        Input:
+        sale_plan: {bouquet: qty}
+
+        Output:
+        bool, shortages: {plant: units_over_capacity}
+        """
         needed_plants = {plant:0 for plant in greenhouse_max_capacity}
         shortages = {}
         for bouquet, bouquet_qty in sale_plan.items():
@@ -110,13 +155,23 @@ class FlowerShop:
         return True,shortages
 
     def cash_status(self):
+        """Return current cash balance (float)."""
         return self.cash
 
     def florist_status(self):
+        """Return current florist list (objects)."""
         return self.florists
 
     def calculate_revenue(self,sale_plan):
-        """calculate revenue this month"""
+        """
+        Calculate and add monthly revenue.
+
+        Input:
+        sale_plan: {bouquet: qty}
+
+        Output:
+        revenue = sum(qty * bouquet_price); also increments cash.
+        """
         revenue = 0.0
         for bouquet, bouquet_qty in sale_plan.items():
             price = bouquet_price.get(bouquet, 0.0)
@@ -125,7 +180,22 @@ class FlowerShop:
         return round(revenue,2)
 
     def calculate_cost(self,restock_cost : float):
-        """calculate cost this month: return total_cost, inventory_cost, labor_cost and rent in order"""
+        """
+        Calculate monthly costs and deduct from cash.
+
+        Input:
+        restock_cost: restock cost for this month.
+
+        Calculation:
+        labor_cost = sum(florist.monthly_cost())
+        rent = rent_pm
+        inventory_cost = inventory.inventory_cost(restock_cost)
+        total_cost = labor + rent + inventory
+        cash decreased by total_cost
+
+        Output:
+        total_cost, inventory_cost, labor_cost, rent
+        """
         labor_cost = 0.0
         rent = rent_pm
         inventory_cost = self.inventory.inventory_cost(restock_cost)
