@@ -32,9 +32,6 @@ class Inventory:
     """Manages the greenhouse stock lifecycle with four steps: consumption，depreciation，restocking，cost."""
     def __init__(
         self,
-        supplier_choice: dict[str, str],
-        sales_plan: dict[str, int],
-        best_choice = None
     ):
         """Initialize inventory with capacity, cost, and procurement system."""
         self.capacity = greenhouse_max_capacity
@@ -42,17 +39,16 @@ class Inventory:
         self.greenhouse_cost = greenhouse_cost_pm
         self.recipe = recipe
         self.current_stock = self.capacity.copy()
-        self.supplier_choice = supplier_choice
-        self.sale_plan = sales_plan
-        self.restock_needed = {}
+        self.restock_needed_dict = {}
+        self.loss = {}
 
-    def consume_plants(self) -> dict[str, int]:
+    def consume_plants(self,sale_plan) -> dict[str, int]:
         """
         Deduct plant quantities from current stock based on sales plan.
         Tips：`self.current_stock`reflects monthly sales consumption.
         """
         consumption = {plant: 0 for plant in self.capacity}
-        for bouquet, qty in self.sale_plan.items():
+        for bouquet, qty in sale_plan.items():
             if bouquet not in self.recipe:
                 continue
             for plant, need in self.recipe[bouquet].items():
@@ -63,31 +59,31 @@ class Inventory:
 
     def apply_depreciation(self)-> tuple[dict[str, int], dict[str, int]]:
         """Calculate the depreciation of various plants per month.return current_stock and loss"""
-        loss = {}
         for plant, rate in self.depreciation.items():
-            loss[plant] = math.ceil(self.current_stock[plant] * rate) # must round up to ensure the loss is an integer
-            self.current_stock[plant] = max(0, self.current_stock[plant] - loss[plant])
-        return self.current_stock,loss
+            self.loss[plant] = math.ceil(self.current_stock[plant] * rate) # must round up to ensure the loss is an integer
+            self.current_stock[plant] = max(0, self.current_stock[plant] - self.loss[plant])
+        return self.current_stock,self.loss
 
     def restock_needed(self) -> dict[str, int]:
         """Calculate restock needed for each plant."""
+        self.restock_needed_dict = {}
         for plant, capacity in self.capacity.items():
             if self.current_stock[plant] < capacity:
-                self.restock_needed[plant] = capacity - self.current_stock[plant]
-        return self.restock_needed
+                self.restock_needed_dict[plant] = capacity - self.current_stock[plant]
+        return self.restock_needed_dict
 
     def auto_restock(self) -> float:
         """Additional coupling method: automatically select the best plan and restock to full capacity."""
         procurement = Procurement(suppliers) # best choice by default
-        best_choice =  procurement.choose_best_supplier(self.restock_needed)
-        restock_cost = procurement.restock_cost(self.restock_needed, best_choice)
-        for plant in self.restock_needed:
+        best_choice =  procurement.choose_best_supplier(self.restock_needed_dict)
+        restock_cost = procurement.restock_cost(self.restock_needed_dict, best_choice)
+        for plant in self.restock_needed_dict.keys():
             self.current_stock[plant] = self.capacity[plant]
         return restock_cost
 
     def inventory_cost(self,restock_cost:float) -> float:
         """Calculate total monthly inventory cost (maintenance + restocking)."""
-        maintenance_cost = sum(self.greenhouse_cost[plant] * self.capacity[plant] for plant in self.capacity)
+        maintenance_cost = sum(self.greenhouse_cost[plant] * (self.current_stock[plant] + self.loss[plant])for plant in self.current_stock.keys())
         return restock_cost + maintenance_cost
 
     def get_stock_status(self) -> str:

@@ -1,12 +1,11 @@
-from Inventory import Inventory, Procurement
+from Inventory import Inventory
 from Florist import Florist
 from Constants import *
 
 class FlowerShop:
     """management class that coordinates sales, inventory, and costs."""
-    def __init__(self,inventory: Inventory,sales_plan: dict[str, int]):
+    def __init__(self,inventory: Inventory):
         self.inventory = inventory
-        self.sale_plan = sales_plan
         self.florists = []
         self.supplier_choice = None
         self.cash = initial_cash
@@ -14,19 +13,17 @@ class FlowerShop:
     def set_supplier_choice(self,supplier_choice):
         self.supplier_choice = supplier_choice
 
-
     def add_florist(self, name: str, talents: dict = None):
         """employee management: add florist"""
         for florist in self.florists:
             if florist.name == name:
-                return f"[Error] florist '{name}' exists."
+                return f"ERROR: florist '{name}' exists."
         if len(self.florists) >= florist_max_capacity:
-            return f"[Error] reached maximum capacity(4)."
+            return f"ERROR: reached maximum capacity(4)."
         else:
             new_florist = Florist(name, talents)
             self.florists.append(new_florist)
-            return f"[Success] current staff: {[florist.name for florist in self.florists]}"
-
+            return True
 
     def remove_florist(self, name: str):
         """employee management: remove florist"""
@@ -39,16 +36,18 @@ class FlowerShop:
                     return f"current staff: {[f.name for f in self.florists]}"
             return f"[Error] no florist named '{name}'."
 
-    def check_customer_demand(self,bouquet_demands = bouquet_demand):
+    def check_customer_demand(self,sale_plan: dict[str, int],bouquet_demands = bouquet_demand):
         """Return list of bouquets exceeding demand."""
         exceeded = []
         for bouquet,qty in bouquet_demands.items():
-            planned = self.sale_plan.get(bouquet, 0)
+            planned = sale_plan.get(bouquet, 0)
             if qty < planned:
                 exceeded.append(bouquet)
-        return exceeded
+        if len(exceeded) > 0:
+            return False, exceeded
+        return True,exceeded
 
-    def check_florist_capacity(self):
+    def check_florist_capacity(self,sale_plan: dict[str, int]):
         """
         check if total florists can complete the required sale_plan in the month
         returns: bool,assignment_dict
@@ -57,7 +56,7 @@ class FlowerShop:
         remaining_time = {f.name: florist_max_time for f in self.florists} # the remaining working time for each florist
         assignment = {f.name: [] for f in self.florists} # tasks each florist complete
         tasks: list[tuple[str, int]] = []
-        for bouquet, qty in self.sale_plan.items():
+        for bouquet, qty in sale_plan.items():
             base_time = bouquet_time_required[bouquet]
             for i in range(qty):
                 tasks.append((bouquet, base_time))
@@ -93,11 +92,11 @@ class FlowerShop:
             structured_assignment[florist] = counter
         return True, structured_assignment
 
-    def check_inventory_capacity(self):
+    def check_inventory_capacity(self,sale_plan: dict[str, int]):
         """check weather the sale_plan exceeded the inventory capacity"""
         needed_plants = {plant:0 for plant in greenhouse_max_capacity}
         shortages = {}
-        for bouquet, bouquet_qty in self.sale_plan.items():
+        for bouquet, bouquet_qty in sale_plan.items():
             if bouquet not in recipe:
                 continue
             for plant, plant_qty in recipe[bouquet].items():
@@ -107,16 +106,19 @@ class FlowerShop:
                 shortages[plant] = needed_plants[plant] - greenhouse_max_capacity[plant]
         if shortages:
             print(f"Lack of raw plants {shortages}")
-            return False
-        return True
+            return False,shortages
+        return True,shortages
 
     def cash_status(self):
         return self.cash
 
-    def calculate_revenue(self):
+    def florist_status(self):
+        return self.florists
+
+    def calculate_revenue(self,sale_plan):
         """calculate revenue this month"""
         revenue = 0.0
-        for bouquet, bouquet_qty in self.sale_plan.items():
+        for bouquet, bouquet_qty in sale_plan.items():
             price = bouquet_price.get(bouquet, 0.0)
             revenue += bouquet_qty * price
         self.cash += revenue

@@ -12,6 +12,9 @@ rent_pm = 800.0
 """initial cash"""
 initial_cash = 7500
 
+"""months by default"""
+month_value_default = 6
+
 """the greenhouse capacity of the roses,daisies and greenery"""
 greenhouse_max_capacity = {
     "roses": 200,
@@ -36,7 +39,7 @@ greenhouse_cost_pm = {
 """the suppliers of the roses,daisies and greenery"""
 suppliers = {
     'Evergreen Essentials': {'roses': 2.80 , 'daisies': 1.50 , 'greenery': 0.95 },
-    'FloraGrow Distributors': {'roses': 1.60 , 'daisies': 1.20 , 'greenery': 1.0}
+    'FloraGrow Distributors': {'roses': 1.60 , 'daisies': 1.20 , 'greenery': 1.80}
 }
 
 """Materials required for each product"""
@@ -65,4 +68,11 @@ bouquet_time_required = {
     "Fern-tastic":20,
     "Be-Leaf in Yourself":30,
     "You Rose to the Occasion": 45
+}
+
+"for simplify the talent creation"
+bouquet_map = {
+    1: "Fern-tastic",
+    2: "Be-Leaf in Yourself",
+    3: "You Rose to the Occasion"
 }
