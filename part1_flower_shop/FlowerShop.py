@@ -10,10 +10,6 @@ class FlowerShop:
         self.supplier_choice = None
         self.cash = initial_cash
 
-    def set_supplier_choice(self,supplier_choice):
-        """Store a supplier choice mapping; not used elsewhere yet."""
-        self.supplier_choice = supplier_choice
-
     def add_florist(self, name: str, talents: dict = None):
         """
         Add a florist if under capacity.
@@ -138,6 +134,9 @@ class FlowerShop:
 
         Output:
         bool, shortages: {plant: units_over_capacity}
+        
+        tips: Since plants are fully restocked by default each month,
+        'greenhouse_max_capacity' is used instead of 'current_stock' here.This avoids creating class Inventory in method.
         """
         needed_plants = {plant:0 for plant in greenhouse_max_capacity}
         shortages = {}

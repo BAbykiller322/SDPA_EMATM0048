@@ -108,25 +108,27 @@ for month in range(months):
           f"current staff: {[florist.name for florist in flowershop.florists]}")
 
     max_hire = florist_max_capacity - len(flowershop.florists)
-    if max_hire == 0:
+    min_hire = 1 if month == 0 else 0  # require hiring at least one florist in the first month
+    if max_hire < min_hire:
         print("Staff is already at maximum.")
         florist_hire_qty = 0
     else:
         while True:
             florist_hire_qty = other_int_input(
-                f"How many florists would you like to hire? (0~{max_hire})\n"
+                f"How many florists would you like to hire? ({min_hire}~{max_hire})\n"
             )
-            if 0 <= florist_hire_qty <= max_hire:
+            if min_hire <= florist_hire_qty <= max_hire:
                 break
-            print(f"Please enter a number between 0 and {max_hire}.")
+            print(f"Please enter a number between {min_hire} and {max_hire}.")
 
-    for _ in range(florist_hire_qty):
+    hired = 0
+    while hired < florist_hire_qty:
         florist_name = input("please input florist name (one at a time):\n").strip()
         if florist_name == "":
             print("name cannot be empty. Skipping.")
             continue
+        
         """talents input -> {bouquet_name: ratio}"""
-
         talents = {}
         while True:
             speciality_choice = talent_int(
@@ -143,7 +145,12 @@ for month in range(months):
             talents[bouquet_map[speciality_choice]] = ratio
         if len(talents) == 0:
             talents = None
-        flowershop.add_florist(florist_name, talents)
+            
+        add_result = flowershop.add_florist(florist_name, talents)
+        if add_result is not True:
+            print(f"{add_result}/n")
+        else:
+            hired += 1
     print(f"current staff: {[florist.name for florist in flowershop.florists]}")
 
     # optionally remove florists with bounds checking
