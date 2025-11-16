@@ -35,15 +35,15 @@ You will be prompted to
    - current florists and their specialties  
    - **sales and costs** for the month  
    - **greenhouse stock levels**  
-   - **updated cash balance**  
+   - **cash balance**  
  - The simulation ends when  
    - the chosen number of months has been completed  
-   - the shop goes bankrupt because cash is no longer sufficient to pay monthly expenses  
+   - the shop goes bankrupt  
 
 
-## 2. Coursework Task 1 Summary
-Task 1 requires a text based simulation of a flower shop that  
- - offers **three bouquet types** with **fixed recipes** and **preparation times**  
+## 2. Coursework Part 1 Summary
+Part 1 requires a text based simulation of a flower shop which:  
+ - offers **three bouquet types** with **recipes** and **preparation times**  
  - stores **roses, daisies and greenery** in a greenhouse with  
    - a **maximum capacity** per item  
    - **monthly depreciation** of stock  
@@ -85,30 +85,29 @@ The solution is divided into several modules.
    It handles all user interaction, calls the methods of the classes above and does not define any classes itself.
 
 ### 3.2 Responsibilities and relationships
+Separation of responsibilities keeps the design clear and easier to maintain:  
  - FlowerShop acts as the **central controller** and coordinates florists, inventory and procurement.  
  - Florist represents individual workers and only handles **labour related logic**.  
  - Inventory encapsulates all **stock** and **greenhouse behaviour**.  
  - Procurement focuses on **suppliers and prices** and can be changed without touching other modules.  
-
-This separation of responsibilities keeps the design clear and easier to maintain.
 
 ## 4. Simulation Workflow
 
 The simulation runs in monthly steps.
 
 ### 4.1 Initial setup
- - The greenhouse is filled to its **maximum capacity** using values from `Constants.py`.  
+ - The greenhouse is filled to its **maximum capacity**.  
  - The **initial cash balance** is set to 7,500 pounds.  
- - Before the first month is simulated the user must **employ at least one florist**.
+ - Users must hire **at least one florist in the first month**  
 
 ### 4.2 Monthly loop
 For each month the following steps occur.
 
 1. **Staff and sales decisions**  
    - Print the current number of florists and their specialties.  
-   - Allow the user to hire or fire florists, while enforcing the minimum and maximum limits.  
+   - Allow the user to hire or fire florists with minimum and maximum limits.  
    - When hiring, ask for the florist name and any talents for specific bouquet types.  
-   - Reject empty names and duplicate names and ask the user to enter a different name.  
+   - Reject empty names and duplicate names.  
    - Ask the user how many bouquets of each type to sell this month.
 
 2. **Plan validation**  
@@ -125,12 +124,11 @@ For each month the following steps occur.
    - Apply **monthly depreciation** to each item in stock, rounding losses up to the next whole unit.  
    - Compute how many units of each item are needed to refill the greenhouse to maximum capacity.  
    - Let the user choose suppliers manually or let the program choose the **cheapest suppliers** automatically.  
-   - Calculate the total **restocking cost**.
 
 5. **Costs, cash and termination**  
    - Calculate florist wages, greenhouse running cost and restocking cost.  
    - Update cash as previous cash plus revenue minus total costs.  
-   - If cash is no longer sufficient, **declare bankruptcy**, print a message and stop the simulation.  
+   - If cash is no longer sufficient, **declare bankruptcy** stop the simulation.  
    - Otherwise print the updated status of cash, florists and stock and proceed to the next month.
 
 ## 5. Extensions and Design Highlights
@@ -141,7 +139,7 @@ For each month the following steps occur.
 
  - **Scheduling algorithm**  
    When checking florist capacity the program breaks the plan into individual bouquet tasks, sorts them by preparation time and assigns each task to the florist who can complete it fastest and still has remaining hours.  
-   This gives a realistic distribution of work and ensures that the whole plan is feasible.
+   This gives a realistic distribution of work.
 
  - **Supplier optimisation**  
    The procurement module compares supplier prices for each item, can automatically choose the cheapest supplier or allow the user to pick manually, and calculates the total restocking cost.  
@@ -151,11 +149,7 @@ For each month the following steps occur.
 
 ## 6. Assumptions and Limitations
 
- - Suppliers always have enough stock and deliver immediately.  
- - All bouquets in a feasible plan are sold during the month.  
+ - Suppliers always have enough stock and deliver immediately.    
  - Preparation time depends only on bouquet type and florist talents.  
  - No random changes in prices or demand are modelled.  
 
-These assumptions keep the focus on the main optimisation and capacity planning tasks required for part 1.
-
----
