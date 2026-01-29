@@ -1,6 +1,5 @@
 # SDPA_EMATM0048_2720314
 This repository contains my solution for **part 1** and **part 2** of the SDPA coursework.  
-Part 1 implements a **text based flower shop simulation** using an **object oriented design** in Python.  
 
 ---
 
