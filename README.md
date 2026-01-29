@@ -1,5 +1,6 @@
-# SDPA_EMATM0048_2720314
-I got disstinction in this course, open source code was for reference only.
+# SDPA_EMATM0048
+
+I got disstinction in this course, open source code was for reference only.  
 This repository contains my solution for **part 1** and **part 2** of the SDPA coursework.  
 
 ---
