@@ -1,0 +1,201 @@
+ticket_id,text,true_topic,true_issue_type,true_sentiment,created_at
+TKT-0001,I cannot log in to my account. The password reset email never arrived.,login,Account,negative,2024-05-20
+TKT-0002,Error 500 is displayed whenever I submit the checkout form.,bug,Bug,negative,2024-03-12
+TKT-0003,Single sign-on with Google stopped working this morning.,login,Account,negative,2024-10-06
+TKT-0004,Forgot my password and the reset link expired before I could use it.,login,Account,neutral,2024-08-04
+TKT-0005,I cannot log in to my account. The password reset email never arrived.,login,Account,negative,2024-02-17
+TKT-0006,Error 500 is displayed whenever I submit the checkout form.,bug,Bug,negative,2024-09-15
+TKT-0007,I need to update the email address associated with my account.,account,Account,neutral,2024-10-14
+TKT-0008,The export to CSV button downloads an empty file.,bug,Bug,neutral,2024-11-28
+TKT-0009,Please help me delete my account and all personal data under GDPR.,account,Account,neutral,2024-04-22
+TKT-0010,Need a refund for the accidental purchase made last week.,payment,Bug,neutral,2024-05-22
+TKT-0011,"Session keeps expiring after only 5 minutes, forcing constant re-login.",login,Account,negative,2024-03-22
+TKT-0012,PayPal checkout fails at the confirmation step with a timeout error.,payment,Bug,negative,2024-05-22
+TKT-0013,Error 500 is displayed whenever I submit the checkout form.,bug,Bug,negative,2024-06-21
+TKT-0014,I cannot log in to my account. The password reset email never arrived.,login,Account,negative,2024-07-13
+TKT-0015,My account is locked after multiple failed login attempts.,login,Account,neutral,2024-06-25
+TKT-0016,My account was deactivated without any prior notification.,account,Account,negative,2024-01-23
+TKT-0017,Need a refund for the accidental purchase made last week.,payment,Bug,neutral,2024-03-04
+TKT-0018,My credit card was charged twice for the same subscription renewal.,payment,Bug,negative,2024-10-09
+TKT-0019,A mobile app for iOS would significantly improve our workflow.,feature,Feature,positive,2024-11-17
+TKT-0020,Need to add a secondary admin user to our organisation account.,account,Account,neutral,2024-07-04
+TKT-0021,How do I transfer ownership of my workspace to a colleague?,account,Account,neutral,2024-12-26
+TKT-0022,I cannot log in to my account. The password reset email never arrived.,login,Account,negative,2024-12-04
+TKT-0023,Dark mode toggle reverts to light mode after every page refresh.,bug,Bug,neutral,2024-05-28
+TKT-0024,"Session keeps expiring after only 5 minutes, forcing constant re-login.",login,Account,negative,2024-04-29
+TKT-0025,Login page keeps redirecting me to an error 403 page.,login,Account,negative,2024-05-22
+TKT-0026,The promo code I applied is not reflected on the final invoice.,payment,Bug,neutral,2024-07-05
+TKT-0027,The dashboard chart is blank – no data is shown despite records existing.,bug,Bug,neutral,2024-06-30
+TKT-0028,The export to CSV button downloads an empty file.,bug,Bug,neutral,2024-05-16
+TKT-0029,Forgot my password and the reset link expired before I could use it.,login,Account,neutral,2024-11-21
+TKT-0030,Sorting the table by date column causes the page to freeze.,bug,Bug,negative,2024-05-05
+TKT-0031,Notifications are duplicated; I receive the same alert three times.,bug,Bug,negative,2024-07-13
+TKT-0032,Please allow customisable notification frequency per user.,feature,Feature,positive,2024-12-18
+TKT-0033,How do I transfer ownership of my workspace to a colleague?,account,Account,neutral,2024-12-16
+TKT-0034,A mobile app for iOS would significantly improve our workflow.,feature,Feature,positive,2024-01-29
+TKT-0035,Dark mode toggle reverts to light mode after every page refresh.,bug,Bug,neutral,2024-01-17
+TKT-0036,We need an API endpoint for programmatic data ingestion.,feature,Feature,neutral,2024-05-17
+TKT-0037,Two-factor authentication code is not working on my phone.,login,Account,negative,2024-10-17
+TKT-0038,Please add support for bulk-deleting records from the list view.,feature,Feature,neutral,2024-12-01
+TKT-0039,I cancelled my subscription but was still billed this month.,payment,Bug,negative,2024-11-25
+TKT-0040,Invoice from last month is missing from my billing history.,payment,Bug,neutral,2024-05-15
+TKT-0041,Error 500 is displayed whenever I submit the checkout form.,bug,Bug,negative,2024-10-14
+TKT-0042,My account was deactivated without any prior notification.,account,Account,negative,2024-10-26
+TKT-0043,Need a refund for the accidental purchase made last week.,payment,Bug,neutral,2024-07-23
+TKT-0044,Please add support for bulk-deleting records from the list view.,feature,Feature,neutral,2024-03-11
+TKT-0045,Please help me delete my account and all personal data under GDPR.,account,Account,neutral,2024-02-16
+TKT-0046,"Session keeps expiring after only 5 minutes, forcing constant re-login.",login,Account,negative,2024-02-26
+TKT-0047,The export to CSV button downloads an empty file.,bug,Bug,neutral,2024-03-22
+TKT-0048,Need a refund for the accidental purchase made last week.,payment,Bug,neutral,2024-02-02
+TKT-0049,I cancelled my subscription but was still billed this month.,payment,Bug,negative,2024-11-01
+TKT-0050,Need a refund for the accidental purchase made last week.,payment,Bug,neutral,2024-05-08
+TKT-0051,Need to add a secondary admin user to our organisation account.,account,Account,neutral,2024-01-06
+TKT-0052,Single sign-on with Google stopped working this morning.,login,Account,negative,2024-10-01
+TKT-0053,A mobile app for iOS would significantly improve our workflow.,feature,Feature,positive,2024-11-24
+TKT-0054,It would be great if we could export reports directly to PDF.,feature,Feature,positive,2024-05-30
+TKT-0055,Invoice from last month is missing from my billing history.,payment,Bug,neutral,2024-08-20
+TKT-0056,Single sign-on with Google stopped working this morning.,login,Account,negative,2024-05-14
+TKT-0057,Need to add a secondary admin user to our organisation account.,account,Account,neutral,2024-04-01
+TKT-0058,I need to update the email address associated with my account.,account,Account,neutral,2024-11-16
+TKT-0059,A mobile app for iOS would significantly improve our workflow.,feature,Feature,positive,2024-11-23
+TKT-0060,I cannot change my display name – the save button does nothing.,account,Account,neutral,2024-04-11
+TKT-0061,The dashboard chart is blank – no data is shown despite records existing.,bug,Bug,neutral,2024-03-23
+TKT-0062,Need to add a secondary admin user to our organisation account.,account,Account,neutral,2024-09-28
+TKT-0063,Forgot my password and the reset link expired before I could use it.,login,Account,neutral,2024-06-14
+TKT-0064,My credit card was charged twice for the same subscription renewal.,payment,Bug,negative,2024-02-27
+TKT-0065,A mobile app for iOS would significantly improve our workflow.,feature,Feature,positive,2024-06-06
+TKT-0066,The app crashes every time I try to upload a file larger than 10 MB.,bug,Bug,negative,2024-05-03
+TKT-0067,I need to update the email address associated with my account.,account,Account,neutral,2024-02-13
+TKT-0068,VAT is not applied correctly for EU customers in the billing portal.,payment,Bug,negative,2024-02-05
+TKT-0069,Need to add a secondary admin user to our organisation account.,account,Account,neutral,2024-03-05
+TKT-0070,The export to CSV button downloads an empty file.,bug,Bug,neutral,2024-08-31
+TKT-0071,How do I transfer ownership of my workspace to a colleague?,account,Account,neutral,2024-05-15
+TKT-0072,Need to add a secondary admin user to our organisation account.,account,Account,neutral,2024-11-06
+TKT-0073,Invoice from last month is missing from my billing history.,payment,Bug,neutral,2024-10-03
+TKT-0074,The export to CSV button downloads an empty file.,bug,Bug,neutral,2024-06-08
+TKT-0075,The promo code I applied is not reflected on the final invoice.,payment,Bug,neutral,2024-11-28
+TKT-0076,We need an API endpoint for programmatic data ingestion.,feature,Feature,neutral,2024-09-21
+TKT-0077,My credit card was charged twice for the same subscription renewal.,payment,Bug,negative,2024-05-06
+TKT-0078,The app crashes every time I try to upload a file larger than 10 MB.,bug,Bug,negative,2024-06-22
+TKT-0079,Forgot my password and the reset link expired before I could use it.,login,Account,neutral,2024-10-10
+TKT-0080,Sorting the table by date column causes the page to freeze.,bug,Bug,negative,2024-04-22
+TKT-0081,I cannot log in to my account. The password reset email never arrived.,login,Account,negative,2024-12-28
+TKT-0082,Two-factor authentication code is not working on my phone.,login,Account,negative,2024-02-04
+TKT-0083,"Session keeps expiring after only 5 minutes, forcing constant re-login.",login,Account,negative,2024-06-18
+TKT-0084,Forgot my password and the reset link expired before I could use it.,login,Account,neutral,2024-05-01
+TKT-0085,Please allow customisable notification frequency per user.,feature,Feature,positive,2024-09-05
+TKT-0086,Sorting the table by date column causes the page to freeze.,bug,Bug,negative,2024-03-08
+TKT-0087,I cannot change my display name – the save button does nothing.,account,Account,neutral,2024-08-30
+TKT-0088,Dark mode toggle reverts to light mode after every page refresh.,bug,Bug,neutral,2024-08-30
+TKT-0089,Invoice from last month is missing from my billing history.,payment,Bug,neutral,2024-02-18
+TKT-0090,Single sign-on with Google stopped working this morning.,login,Account,negative,2024-08-08
+TKT-0091,We need an API endpoint for programmatic data ingestion.,feature,Feature,neutral,2024-07-29
+TKT-0092,VAT is not applied correctly for EU customers in the billing portal.,payment,Bug,negative,2024-01-28
+TKT-0093,I cannot log in to my account. The password reset email never arrived.,login,Account,negative,2024-07-25
+TKT-0094,A mobile app for iOS would significantly improve our workflow.,feature,Feature,positive,2024-02-25
+TKT-0095,Error 500 is displayed whenever I submit the checkout form.,bug,Bug,negative,2024-04-07
+TKT-0096,Please help me delete my account and all personal data under GDPR.,account,Account,neutral,2024-03-12
+TKT-0097,Invoice from last month is missing from my billing history.,payment,Bug,neutral,2024-05-22
+TKT-0098,Invoice from last month is missing from my billing history.,payment,Bug,neutral,2024-02-08
+TKT-0099,VAT is not applied correctly for EU customers in the billing portal.,payment,Bug,negative,2024-10-08
+TKT-0100,I cannot log in to my account. The password reset email never arrived.,login,Account,negative,2024-11-29
+TKT-0101,Need to add a secondary admin user to our organisation account.,account,Account,neutral,2024-01-08
+TKT-0102,"Session keeps expiring after only 5 minutes, forcing constant re-login.",login,Account,negative,2024-05-01
+TKT-0103,Notifications are duplicated; I receive the same alert three times.,bug,Bug,negative,2024-09-05
+TKT-0104,Invoice from last month is missing from my billing history.,payment,Bug,neutral,2024-07-24
+TKT-0105,Two-factor authentication code is not working on my phone.,login,Account,negative,2024-07-13
+TKT-0106,Login page keeps redirecting me to an error 403 page.,login,Account,negative,2024-05-15
+TKT-0107,PayPal checkout fails at the confirmation step with a timeout error.,payment,Bug,negative,2024-08-04
+TKT-0108,My profile picture is not updating even after multiple uploads.,account,Account,neutral,2024-09-06
+TKT-0109,Error 500 is displayed whenever I submit the checkout form.,bug,Bug,negative,2024-05-31
+TKT-0110,The app crashes every time I try to upload a file larger than 10 MB.,bug,Bug,negative,2024-10-23
+TKT-0111,I need to update the email address associated with my account.,account,Account,neutral,2024-06-09
+TKT-0112,I cannot log in to my account. The password reset email never arrived.,login,Account,negative,2024-10-26
+TKT-0113,Need a refund for the accidental purchase made last week.,payment,Bug,neutral,2024-09-28
+TKT-0114,The app crashes every time I try to upload a file larger than 10 MB.,bug,Bug,negative,2024-09-17
+TKT-0115,"Session keeps expiring after only 5 minutes, forcing constant re-login.",login,Account,negative,2024-04-05
+TKT-0116,Forgot my password and the reset link expired before I could use it.,login,Account,neutral,2024-02-04
+TKT-0117,Notifications are duplicated; I receive the same alert three times.,bug,Bug,negative,2024-03-02
+TKT-0118,How do I transfer ownership of my workspace to a colleague?,account,Account,neutral,2024-10-23
+TKT-0119,I need to update the email address associated with my account.,account,Account,neutral,2024-11-13
+TKT-0120,Login page keeps redirecting me to an error 403 page.,login,Account,negative,2024-12-02
+TKT-0121,I cannot change my display name – the save button does nothing.,account,Account,neutral,2024-09-24
+TKT-0122,Can you implement a calendar view for upcoming deadlines?,feature,Feature,positive,2024-04-14
+TKT-0123,Please add support for bulk-deleting records from the list view.,feature,Feature,neutral,2024-05-15
+TKT-0124,Invoice from last month is missing from my billing history.,payment,Bug,neutral,2024-12-09
+TKT-0125,We need an API endpoint for programmatic data ingestion.,feature,Feature,neutral,2024-06-10
+TKT-0126,I cannot log in to my account. The password reset email never arrived.,login,Account,negative,2024-08-22
+TKT-0127,I cannot change my display name – the save button does nothing.,account,Account,neutral,2024-02-21
+TKT-0128,Forgot my password and the reset link expired before I could use it.,login,Account,neutral,2024-04-19
+TKT-0129,My account was deactivated without any prior notification.,account,Account,negative,2024-03-08
+TKT-0130,It would be great if we could export reports directly to PDF.,feature,Feature,positive,2024-05-05
+TKT-0131,Can you implement a calendar view for upcoming deadlines?,feature,Feature,positive,2024-03-21
+TKT-0132,VAT is not applied correctly for EU customers in the billing portal.,payment,Bug,negative,2024-10-05
+TKT-0133,Would love a keyboard shortcut to quickly create a new ticket.,feature,Feature,positive,2024-11-30
+TKT-0134,I need to update the email address associated with my account.,account,Account,neutral,2024-12-07
+TKT-0135,My account was deactivated without any prior notification.,account,Account,negative,2024-12-05
+TKT-0136,Two-factor authentication code is not working on my phone.,login,Account,negative,2024-05-15
+TKT-0137,I cannot log in to my account. The password reset email never arrived.,login,Account,negative,2024-10-10
+TKT-0138,The dashboard chart is blank – no data is shown despite records existing.,bug,Bug,neutral,2024-05-24
+TKT-0139,How do I transfer ownership of my workspace to a colleague?,account,Account,neutral,2024-06-24
+TKT-0140,The export to CSV button downloads an empty file.,bug,Bug,neutral,2024-11-20
+TKT-0141,Would love a keyboard shortcut to quickly create a new ticket.,feature,Feature,positive,2024-09-07
+TKT-0142,A mobile app for iOS would significantly improve our workflow.,feature,Feature,positive,2024-01-27
+TKT-0143,Single sign-on with Google stopped working this morning.,login,Account,negative,2024-08-04
+TKT-0144,It would be great if we could export reports directly to PDF.,feature,Feature,positive,2024-01-02
+TKT-0145,A mobile app for iOS would significantly improve our workflow.,feature,Feature,positive,2024-03-07
+TKT-0146,Please add support for bulk-deleting records from the list view.,feature,Feature,neutral,2024-08-14
+TKT-0147,My profile picture is not updating even after multiple uploads.,account,Account,neutral,2024-08-06
+TKT-0148,I need to update the email address associated with my account.,account,Account,neutral,2024-02-27
+TKT-0149,Single sign-on with Google stopped working this morning.,login,Account,negative,2024-03-17
+TKT-0150,I need to update the email address associated with my account.,account,Account,neutral,2024-07-08
+TKT-0151,I cannot change my display name – the save button does nothing.,account,Account,neutral,2024-03-16
+TKT-0152,Invoice from last month is missing from my billing history.,payment,Bug,neutral,2024-01-22
+TKT-0153,Can you implement a calendar view for upcoming deadlines?,feature,Feature,positive,2024-01-21
+TKT-0154,Please add support for bulk-deleting records from the list view.,feature,Feature,neutral,2024-12-15
+TKT-0155,The export to CSV button downloads an empty file.,bug,Bug,neutral,2024-02-22
+TKT-0156,A mobile app for iOS would significantly improve our workflow.,feature,Feature,positive,2024-10-13
+TKT-0157,Need a refund for the accidental purchase made last week.,payment,Bug,neutral,2024-03-20
+TKT-0158,Dark mode toggle reverts to light mode after every page refresh.,bug,Bug,neutral,2024-03-24
+TKT-0159,Notifications are duplicated; I receive the same alert three times.,bug,Bug,negative,2024-01-13
+TKT-0160,The export to CSV button downloads an empty file.,bug,Bug,neutral,2024-06-19
+TKT-0161,VAT is not applied correctly for EU customers in the billing portal.,payment,Bug,negative,2024-12-08
+TKT-0162,The dashboard chart is blank – no data is shown despite records existing.,bug,Bug,neutral,2024-03-22
+TKT-0163,Login page keeps redirecting me to an error 403 page.,login,Account,negative,2024-01-20
+TKT-0164,Invoice from last month is missing from my billing history.,payment,Bug,neutral,2024-04-12
+TKT-0165,PayPal checkout fails at the confirmation step with a timeout error.,payment,Bug,negative,2024-06-05
+TKT-0166,Error 500 is displayed whenever I submit the checkout form.,bug,Bug,negative,2024-01-13
+TKT-0167,Notifications are duplicated; I receive the same alert three times.,bug,Bug,negative,2024-06-17
+TKT-0168,A mobile app for iOS would significantly improve our workflow.,feature,Feature,positive,2024-02-05
+TKT-0169,Can you implement a calendar view for upcoming deadlines?,feature,Feature,positive,2024-11-24
+TKT-0170,Please help me delete my account and all personal data under GDPR.,account,Account,neutral,2024-12-13
+TKT-0171,My account was deactivated without any prior notification.,account,Account,negative,2024-01-15
+TKT-0172,My account is locked after multiple failed login attempts.,login,Account,neutral,2024-04-01
+TKT-0173,My account was deactivated without any prior notification.,account,Account,negative,2024-01-20
+TKT-0174,Forgot my password and the reset link expired before I could use it.,login,Account,neutral,2024-08-10
+TKT-0175,Please allow customisable notification frequency per user.,feature,Feature,positive,2024-06-09
+TKT-0176,Need a refund for the accidental purchase made last week.,payment,Bug,neutral,2024-09-18
+TKT-0177,Login page keeps redirecting me to an error 403 page.,login,Account,negative,2024-10-22
+TKT-0178,The dashboard chart is blank – no data is shown despite records existing.,bug,Bug,neutral,2024-01-23
+TKT-0179,My credit card was charged twice for the same subscription renewal.,payment,Bug,negative,2024-09-23
+TKT-0180,My profile picture is not updating even after multiple uploads.,account,Account,neutral,2024-12-09
+TKT-0181,The dashboard chart is blank – no data is shown despite records existing.,bug,Bug,neutral,2024-08-08
+TKT-0182,Single sign-on with Google stopped working this morning.,login,Account,negative,2024-06-18
+TKT-0183,My account was deactivated without any prior notification.,account,Account,negative,2024-12-05
+TKT-0184,Single sign-on with Google stopped working this morning.,login,Account,negative,2024-06-02
+TKT-0185,My account was deactivated without any prior notification.,account,Account,negative,2024-12-07
+TKT-0186,PayPal checkout fails at the confirmation step with a timeout error.,payment,Bug,negative,2024-07-25
+TKT-0187,Would love a keyboard shortcut to quickly create a new ticket.,feature,Feature,positive,2024-03-06
+TKT-0188,Notifications are duplicated; I receive the same alert three times.,bug,Bug,negative,2024-12-06
+TKT-0189,The promo code I applied is not reflected on the final invoice.,payment,Bug,neutral,2024-03-30
+TKT-0190,I cannot change my display name – the save button does nothing.,account,Account,neutral,2024-06-03
+TKT-0191,Need a refund for the accidental purchase made last week.,payment,Bug,neutral,2024-01-01
+TKT-0192,Can you implement a calendar view for upcoming deadlines?,feature,Feature,positive,2024-04-17
+TKT-0193,VAT is not applied correctly for EU customers in the billing portal.,payment,Bug,negative,2024-10-23
+TKT-0194,My profile picture is not updating even after multiple uploads.,account,Account,neutral,2024-06-13
+TKT-0195,I cancelled my subscription but was still billed this month.,payment,Bug,negative,2024-08-14
+TKT-0196,Sorting the table by date column causes the page to freeze.,bug,Bug,negative,2024-08-30
+TKT-0197,The export to CSV button downloads an empty file.,bug,Bug,neutral,2024-02-13
+TKT-0198,Would love a keyboard shortcut to quickly create a new ticket.,feature,Feature,positive,2024-12-05
+TKT-0199,My account was deactivated without any prior notification.,account,Account,negative,2024-02-17
+TKT-0200,The export to CSV button downloads an empty file.,bug,Bug,neutral,2024-06-07

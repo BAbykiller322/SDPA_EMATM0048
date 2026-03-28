@@ -1,0 +1,4 @@
+Method,Type,NMI_with_ground_truth,ARI_with_ground_truth,Avg_topic_confidence,Label_coverage,Label_accuracy,Requires_training_data,Interpretable_labels,Fit_time_s
+LDA,Unsupervised Topic Model,0.251,0.142,0.877,N/A,N/A,No,Manual (post-hoc),0.47
+NMF,Unsupervised Topic Model,0.364,0.221,0.193,N/A,N/A,No,Manual (post-hoc),0.008
+VADER + Rule-based,Semi-automated Labelling,N/A,N/A,N/A,80.50%,90.68%,No,Yes (predefined),0.008

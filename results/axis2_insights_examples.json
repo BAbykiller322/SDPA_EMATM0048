@@ -1,0 +1,29 @@
+[
+  {
+    "insight": "High-priority: Negative Bug reports need immediate engineering attention",
+    "method": "VADER + Rule-based",
+    "filter": "issue_type=Bug AND sentiment=negative",
+    "examples": [
+      "Error 500 is displayed whenever I submit the checkout form.",
+      "Error 500 is displayed whenever I submit the checkout form."
+    ]
+  },
+  {
+    "insight": "Quick-win opportunities: Positive Feature requests indicate user enthusiasm",
+    "method": "VADER + Rule-based",
+    "filter": "issue_type=Feature AND sentiment=positive",
+    "examples": [
+      "A mobile app for iOS would significantly improve our workflow.",
+      "Please allow customisable notification frequency per user."
+    ]
+  },
+  {
+    "insight": "Account issues cluster together – a dedicated onboarding FAQ could reduce ticket volume",
+    "method": "LDA / NMF dominant topic",
+    "filter": "lda_topic concentrated on login/account keywords",
+    "examples": [
+      "I cannot log in to my account. The password reset email never arrived.",
+      "Single sign-on with Google stopped working this morning."
+    ]
+  }
+]
